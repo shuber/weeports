@@ -1,11 +1,11 @@
 <?php
 
-// Set this to wherever the reports directory is 
+// Set this to wherever the weeports directory is 
 //   e.g.
-//     APP_ROOT.DIRECTORY_SEPARATOR.'reports'
+//     APP_ROOT.DIRECTORY_SEPARATOR.'weeports'
 //     OR
-//     '/some/shared/directory/reports'
-define('LIB_ROOT', APP_ROOT.DIRECTORY_SEPARATOR.'reports');
+//     '/some/shared/directory/weeports'
+define('WEEPORTS_ROOT', APP_ROOT.DIRECTORY_SEPARATOR.'weeports');
 
 
 // Set this to wherever your report files are stored
