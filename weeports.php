@@ -1,10 +1,5 @@
 <?php
 
-if (isset($_GET['debug'])) {
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL);
-}
-
 if (!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 if (!defined('PS')) define('PS', PATH_SEPARATOR);
 
