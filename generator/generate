@@ -1,0 +1,36 @@
+#!/usr/bin/php
+
+<?php
+
+function copy_directory($source, $destination, $exclusions = array()) {
+    $exclusions = array_merge(array('.', '..', '.gitignore'), $exclusions);
+    if (!file_exists($destination)) mkdir($destination, 0700, true);
+    $directory = opendir($source);
+    while ($file = readdir($directory)) {
+        if (!in_array($file, $exclusions)) {
+            $path = $source.DIRECTORY_SEPARATOR.$file;
+            echo "Copying $file\n";
+            $function = (is_dir($path)) ? 'copy_directory' : 'copy';
+            call_user_func($function, $path, $destination.DIRECTORY_SEPARATOR.$file);
+        }
+    }
+    closedir($directory);
+}
+
+array_shift($argv);
+if (empty($argv)) {
+    echo "Must specify a destination path\n";
+    exit;
+}
+
+$directory = array_shift($argv);
+$path = $_SERVER['PWD'].DIRECTORY_SEPARATOR.$directory;
+
+echo "Generating files at ".$path."\n\n";
+
+copy_directory(dirname(__FILE__), $path, array(__FILE__));
+
+?>
+
+Complete!
+
