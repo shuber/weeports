@@ -5,8 +5,8 @@ class Dispatcher {
     static function dispatch($url) {
         if (empty($url)) {
             $response = static::render_index();
-        } else if (file_exists(REPORTS_ROOT.DS.$url.'.php')) {
-            $response = static::render_report(REPORTS_ROOT.DS.$url.'.php');
+        } else if (($file = REPORTS_ROOT.DS.$url.'.php') && file_exists($file)) {
+            $response = static::render_report($file);
         } else {
             $response = static::render_404();
         }
