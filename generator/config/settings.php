@@ -37,3 +37,8 @@ define('TEMPLATES_ROOT', APP_ROOT.DIRECTORY_SEPARATOR.'templates');
 //   e.g.
 //     APP_ROOT.DIRECTORY_SEPARATOR.'tmp'
 define('TMP_ROOT', APP_ROOT.DIRECTORY_SEPARATOR.'tmp');
+
+// Set this to wherever your external vendor files are stored
+//   e.g.
+//     APP_ROOT.DIRECTORY_SEPARATOR.'vendor'
+define('VENDOR_ROOT', APP_ROOT.DIRECTORY_SEPARATOR.'vendor');
