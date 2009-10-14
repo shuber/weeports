@@ -15,9 +15,9 @@ define('PATH_PREFIX', preg_replace('/\/'.basename(PUBLIC_ROOT).'\/'.basename($_S
 define('IMAGES_DIRECTORY', 'images');
 define('JAVASCRIPTS_DIRECTORY', 'javascripts');
 define('LAYOUTS_TEMPLATE_DIRECTORY', 'layouts');
-define('REPORTS_TEMPLATE_DIRECTORY', 'reports');
 define('SHARED_TEMPLATE_DIRECTORY', 'shared');
 define('STYLESHEETS_DIRECTORY', 'stylesheets');
+define('VIEWS_TEMPLATE_DIRECTORY', 'views');
 
 require_once 'lib'.DS.'functions.php';
 require_once 'lib'.DS.'environment.php';
