@@ -7,6 +7,9 @@
 //     '/some/shared/directory/weeports'
 define('WEEPORTS_ROOT', APP_ROOT.DIRECTORY_SEPARATOR.'weeports');
 
+// Set this to true if you want to display errors
+define('DEVELOPMENT_MODE', false);
+
 
 /********************************************************************
  *  You probably don't need to change any settings below this line  *
