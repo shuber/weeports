@@ -7,13 +7,14 @@ define('PUBLIC_ROOT', dirname($_SERVER['SCRIPT_FILENAME']));
 define('WEEPORTS_ROOT', dirname(PUBLIC_ROOT));
 
 define('APP_ROOT', WEEPORTS_ROOT.DS.'app');
-define('CONFIG_ROOT', WEEPORTS_ROOT.DS.'config');
-define('REPORTS_ROOT', APP_ROOT.DIRECTORY_SEPARATOR.'reports');
-define('TEMPLATES_ROOT', APP_ROOT.DIRECTORY_SEPARATOR.'templates');
+define('REPORTS_ROOT', APP_ROOT.DS.'reports');
+define('TEMPLATES_ROOT', APP_ROOT.DS.'templates');
 
-define('LOG_ROOT', WEEPORTS_ROOT.DIRECTORY_SEPARATOR.'log');
-define('TMP_ROOT', WEEPORTS_ROOT.DIRECTORY_SEPARATOR.'tmp');
-define('VENDOR_ROOT', WEEPORTS_ROOT.DIRECTORY_SEPARATOR.'vendor');
+define('CONFIG_ROOT', WEEPORTS_ROOT.DS.'config');
+define('LIB_ROOT', WEEPORTS_ROOT.DS.'lib');
+define('LOG_ROOT', WEEPORTS_ROOT.DS.'log');
+define('TMP_ROOT', WEEPORTS_ROOT.DS.'tmp');
+define('VENDOR_ROOT', WEEPORTS_ROOT.DS.'vendor');
 
 define('PATH_PREFIX', preg_replace('#/'.basename(PUBLIC_ROOT).'/'.basename($_SERVER['SCRIPT_NAME']).'#', '', $_SERVER['SCRIPT_NAME']));
 
@@ -31,7 +32,7 @@ Environment::set_error_log(LOG_ROOT.DS.'error.log');
 
 spl_autoload_register('Environment::autoload');
 Environment::remove_include_path(VENDOR_ROOT);
-Environment::append_include_path(WEEPORTS_ROOT.DS.'lib');
+Environment::append_include_path(LIB_ROOT);
 Environment::append_include_path(VENDOR_ROOT);
 Environment::append_include_path(dirname(__FILE__).DS.'lib');
 Environment::append_include_path(dirname(__FILE__).DS.'lib'.DS.'database_adapters');
