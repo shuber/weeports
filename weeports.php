@@ -7,7 +7,7 @@ define('PUBLIC_ROOT', dirname($_SERVER['SCRIPT_FILENAME']));
 define('WEEPORTS_ROOT', dirname(PUBLIC_ROOT));
 
 define('APP_ROOT', WEEPORTS_ROOT.DS.'app');
-define('CONFIG_ROOT', APP_ROOT.DS.'config');
+define('CONFIG_ROOT', WEEPORTS_ROOT.DS.'config');
 define('REPORTS_ROOT', APP_ROOT.DIRECTORY_SEPARATOR.'reports');
 define('TEMPLATES_ROOT', APP_ROOT.DIRECTORY_SEPARATOR.'templates');
 
@@ -35,5 +35,8 @@ Environment::append_include_path(WEEPORTS_ROOT.DS.'lib');
 Environment::append_include_path(VENDOR_ROOT);
 Environment::append_include_path(dirname(__FILE__).DS.'lib');
 Environment::append_include_path(dirname(__FILE__).DS.'lib'.DS.'database_adapters');
+Environment::append_include_path(dirname(__FILE__).DS.'lib'.DS.'vendor');
+
+ConnectionManager::$configurations = Spyc::YAMLLoad(CONFIG_ROOT.DS.'database.yml');
 
 echo Dispatcher::dispatch(isset($_GET['url']) ? $_GET['url'] : '');
