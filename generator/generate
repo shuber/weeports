@@ -4,7 +4,7 @@
 
 function copy_directory($source, $destination, $exclusions = array()) {
     $exclusions = array_merge(array('.', '..', '.gitignore'), $exclusions);
-    if (!file_exists($destination)) mkdir($destination, 0700, true);
+    if (!file_exists($destination)) mkdir($destination, 0755, true);
     $directory = opendir($source);
     while ($file = readdir($directory)) {
         if (!in_array($file, $exclusions)) {
@@ -12,6 +12,7 @@ function copy_directory($source, $destination, $exclusions = array()) {
             echo "Copying $file\n";
             $function = (is_dir($path)) ? 'copy_directory' : 'copy';
             call_user_func($function, $path, $destination.DIRECTORY_SEPARATOR.$file);
+            chmod($destination.DIRECTORY_SEPARATOR.$file, 0755);
         }
     }
     closedir($directory);
@@ -28,7 +29,7 @@ $path = $_SERVER['PWD'].DIRECTORY_SEPARATOR.$directory;
 
 echo "Generating files at ".$path."\n\n";
 
-copy_directory(dirname(__FILE__), $path, array(__FILE__));
+copy_directory(dirname(__FILE__), $path, array(basename(__FILE__)));
 
 ?>
 

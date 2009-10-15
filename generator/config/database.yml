@@ -1,0 +1,12 @@
+quickbooks:
+  adapter: oracle
+  host: localhost
+  database: quickbooks
+  username: root
+  password: 
+
+daceasy:
+  adapter: odbc
+  database: debc_current
+  username: root
+  password: 

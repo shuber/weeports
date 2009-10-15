@@ -35,6 +35,10 @@ class Environment {
         self::set_include_paths($paths);
     }
     
+    static function set_error_log($path) {
+        ini_set('error_log', $path);
+    }
+    
     static function set_include_paths($paths) {
         return set_include_path(join(PS, $paths));
     }

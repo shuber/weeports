@@ -1,6 +1,5 @@
 <?php
 
-define('APP_ROOT', dirname(dirname(__FILE__)));
+set_include_path(get_include_path().PATH_SEPARATOR.dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'vendor');
 
-require_once APP_ROOT.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'settings.php';
-require_once WEEPORTS_ROOT.DIRECTORY_SEPARATOR.'weeports.php';
+require_once 'weeports/weeports.php';
