@@ -38,4 +38,4 @@ Environment::append_include_path(dirname(__FILE__).DS.'lib'.DS.'database_adapter
 
 ConnectionManager::$configurations = Spyc::YAMLLoad(CONFIG_ROOT.DS.'database.yml');
 
-echo Dispatcher::dispatch(isset($_GET['url']) ? $_GET['url'] : '');
+echo Dispatcher::dispatch(isset($_GET['weeports_uri']) ? $_GET['weeports_uri'] : '');

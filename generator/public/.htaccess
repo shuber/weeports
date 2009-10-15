@@ -3,5 +3,5 @@
   RewriteBase /public
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteRule (.*) index.php?url=$1 [L,QSA]
+  RewriteRule (.*) index.php?weeports_uri=$1 [L,QSA]
 </IfModule>
