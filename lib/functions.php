@@ -23,8 +23,7 @@ function content_tag($type, $content, $attrs = array()) {
 }
 
 function link_to($label, $url, $attrs = array()) {
-    if (!preg_match('#^((http[s]?)|javascript):#', $url)) $url = PATH_PREFIX.'/'.preg_replace('#^/#', '', $url);
-    return content_tag('a', $label, array_merge(array('href' => $url), $attrs));
+    return content_tag('a', $label, array_merge(array('href' => url_for($url)), $attrs));
 }
 
 function rglob($pattern, $flags = 0, $path = '') {
@@ -36,4 +35,9 @@ function rglob($pattern, $flags = 0, $path = '') {
     $files = glob($path . $pattern, $flags);
     foreach ($paths as $p) $files = array_merge($files, rglob($pattern, $flags, $p . '/'));
     return $files;
+}
+
+function url_for($url) {
+    if (!preg_match('#^((http[s]?)|javascript):#', $url)) $url = PATH_PREFIX.'/'.preg_replace('#^/#', '', $url);
+    return $url;
 }
