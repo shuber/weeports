@@ -13,7 +13,7 @@ class Report {
     
     function __construct($report) {
         $this->file = $report;
-        $this->title = basename($report);
+        $this->title = Inflector::humanize(str_replace('.php', '', basename($report)));
     }
     
     function __get($key) {
