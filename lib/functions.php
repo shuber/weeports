@@ -22,6 +22,14 @@ function content_tag($type, $content, $attrs = array()) {
     return $tag.'>'.$content.'</'.$type.'>';
 }
 
+function cycle($values, $key) {
+    static $cycle = array();
+    if (!isset($cycle[$key])) $cycle[$key] = $values;
+    $value = array_shift($cycle[$key]);
+    array_push($cycle[$key], $value);
+    return $value;
+}
+
 function link_to($label, $url, $attrs = array()) {
     return content_tag('a', $label, array_merge(array('href' => url_for($url)), $attrs));
 }
