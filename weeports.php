@@ -35,7 +35,6 @@ Environment::append_include_path(WEEPORTS_ROOT.DS.'lib');
 Environment::append_include_path(VENDOR_ROOT);
 Environment::append_include_path(dirname(__FILE__).DS.'lib');
 Environment::append_include_path(dirname(__FILE__).DS.'lib'.DS.'database_adapters');
-Environment::append_include_path(dirname(__FILE__).DS.'lib'.DS.'vendor');
 
 ConnectionManager::$configurations = Spyc::YAMLLoad(CONFIG_ROOT.DS.'database.yml');
 
