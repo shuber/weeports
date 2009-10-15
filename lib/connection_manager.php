@@ -17,7 +17,7 @@ class ConnectionManager {
             $username = array_delete('username', $configuration);
             $password = array_delete('password', $configuration);
             $configuration['dbname'] = array_delete('database', $configuration);
-            self::$connections[$name] = new PDO($adapter.':'.array_join_assoc(':', ';', $configuration), $username, $password);
+            self::$connections[$name] = new PDO($adapter.':'.array_join_assoc('=', ';', $configuration), $username, $password);
         } else {
             throw new InvalidArgumentException('Database configuration "'.$name.'" does not exist');
         }
