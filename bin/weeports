@@ -29,7 +29,7 @@ $path = $_SERVER['PWD'].DIRECTORY_SEPARATOR.$directory;
 
 echo "Generating files at ".$path."\n\n";
 
-copy_directory(dirname(__FILE__), $path, array(basename(__FILE__)));
+copy_directory(dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR.'skeleton', $path);
 
 ?>
 
