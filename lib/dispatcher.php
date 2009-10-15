@@ -4,11 +4,11 @@ class Dispatcher {
     
     static function dispatch($url) {
         if (empty($url)) {
-            $response = static::render_index();
+            $response = self::render_index();
         } else if (($file = REPORTS_ROOT.DS.$url.'.php') && file_exists($file)) {
-            $response = static::render_report($file);
+            $response = self::render_report($file);
         } else {
-            $response = static::render_404();
+            $response = self::render_404();
         }
         return $response;
     }

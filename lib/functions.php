@@ -1,5 +1,19 @@
 <?php
 
+function array_delete($key, &$array) {
+    $value = isset($array[$key]) ? $array[$key] : null;
+    unset($array[$key]);
+    return $value;
+}
+
+function array_join_assoc($assoc_glue, $glue, $array) {
+    $result = array();
+    foreach ($array as $key => $value) {
+        $result[] = $key.$assoc_glue.$value;
+    }
+    return implode($glue, $result);
+}
+
 function content_tag($type, $content, $attrs = array()) {
     $tag = '<'.$type;
     foreach ($attrs as $key => $value) {
