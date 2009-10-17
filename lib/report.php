@@ -52,7 +52,7 @@ class Report {
     
     protected function template_locals() {
         $locals = get_object_vars($this);
-        return array_merge(array_delete('attributes', $locals), $locals);
+        return array_merge(array('report' => $this), array_delete('attributes', $locals), $locals);
     }
     
 }
