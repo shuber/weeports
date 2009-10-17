@@ -38,22 +38,21 @@ class Report {
     }
     
     protected function render_layout() {
-        return $this->render_template(LAYOUTS_TEMPLATE_DIRECTORY.DS.$this->layout.'.php');
-    }
-    
-    protected function render_template($template) {
-        ob_start();
-        include TEMPLATES_ROOT.DS.$template;
-        return ob_get_clean();
+        return Template::render(LAYOUTS_TEMPLATE_DIRECTORY.DS.$this->layout, $this->template_locals());
     }
     
     protected function render_view() {
-        return $this->render_template(VIEWS_TEMPLATE_DIRECTORY.DS.$this->view.'.php'); 
+        return Template::render(VIEWS_TEMPLATE_DIRECTORY.DS.$this->view, $this->template_locals());
     }
     
     protected function run_query() {
         $this->connection = &ConnectionManager::connection($this->database);
         $this->result = $this->connection->query($this->sql)->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    protected function template_locals() {
+        $locals = get_object_vars($this);
+        return array_merge(array_delete('attributes', $locals), $locals);
     }
     
 }
