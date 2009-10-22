@@ -14,7 +14,6 @@ define('CONFIG_ROOT', WEEPORTS_ROOT.DS.'config');
 define('LIB_ROOT', WEEPORTS_ROOT.DS.'lib');
 define('LOG_ROOT', WEEPORTS_ROOT.DS.'log');
 define('TMP_ROOT', WEEPORTS_ROOT.DS.'tmp');
-define('VENDOR_ROOT', WEEPORTS_ROOT.DS.'vendor');
 
 define('PATH_PREFIX', str_replace('/'.basename(PUBLIC_ROOT).'/'.basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']));
 define('REQUEST_URI', str_replace(PATH_PREFIX, '', $_SERVER['REQUEST_URI']));
