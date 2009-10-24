@@ -1,8 +1,11 @@
 <?php
 
 function array_delete($key, &$array) {
-    $value = isset($array[$key]) ? $array[$key] : null;
-    unset($array[$key]);
+    $value = null;
+    if (isset($array[$key])) {
+        $value = $array[$key];
+        unset($array[$key]);
+    }
     return $value;
 }
 

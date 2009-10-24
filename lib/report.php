@@ -46,8 +46,10 @@ class Report {
     }
     
     protected function run_query() {
-        $this->connection = &ConnectionManager::connection($this->database);
-        $this->result = $this->connection->query($this->sql)->fetchAll(PDO::FETCH_ASSOC);
+        if ($this->database !== false) {
+            $this->connection = &ConnectionManager::connection($this->database);
+            $this->result = $this->connection->query($this->sql)->fetchAll(PDO::FETCH_ASSOC);
+        }
     }
     
     protected function template_locals() {
