@@ -3,7 +3,7 @@
 class Dispatcher {
     
     static function dispatch($url) {
-        if (empty($url)) {
+        if (empty($url) || $url == '/') {
             $response = self::render_index();
         } else if (($file = REPORTS_ROOT.DS.$url.'.php') && file_exists($file)) {
             $response = self::render_report($file);

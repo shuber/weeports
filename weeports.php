@@ -15,6 +15,7 @@ define('LIB_ROOT', WEEPORTS_ROOT.DS.'lib');
 define('LOG_ROOT', WEEPORTS_ROOT.DS.'log');
 define('TMP_ROOT', WEEPORTS_ROOT.DS.'tmp');
 
+$_SERVER['REQUEST_URI'] = preg_replace('#^https?://'.$_SERVER['HTTP_HOST'].'#', '', $_SERVER['REQUEST_URI']);
 define('PATH_PREFIX', str_replace('/'.basename(PUBLIC_ROOT).'/'.basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']));
 define('REQUEST_URI', str_replace(PATH_PREFIX, '', $_SERVER['REQUEST_URI']));
 
