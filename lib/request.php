@@ -110,15 +110,18 @@ class Request {
     }
     
     function request_uri() {
-        if (isset($this->env['REQUEST_URI'])) {
-            $request_uri = preg_replace('#^\w+\://[^/]+#', '', $this->env['REQUEST_URI']);
-        } else {
-            $request_uri = $this->env['PATH_INFO'];
-            if (preg_match('#[^/]+$#', $this->env['SCRIPT_NAME'])) $request_uri = preg_replace('#'.preg_quote($this->env['SCRIPT_NAME']).'/#', '', $request_uri);
-            if (isset($this->env['QUERY_STRING']) && !empty($this->env['QUERY_STRING'])) $request_uri .= '?'.$this->env['QUERY_STRING'];
-            $this->env['REQUEST_URI'] = $request_uri;
+        if (!isset($this->env['PARSED_REQUEST_URI'])) {
+            if (isset($this->env['REQUEST_URI'])) {
+                $request_uri = preg_replace('#^\w+\://[^/]+#', '', $this->env['REQUEST_URI']);
+            } else {
+                $request_uri = $this->env['PATH_INFO'];
+                if (preg_match('#[^/]+$#', $this->env['SCRIPT_NAME'])) $request_uri = preg_replace('#'.preg_quote($this->env['SCRIPT_NAME']).'/#', '', $request_uri);
+                if (isset($this->env['QUERY_STRING']) && !empty($this->env['QUERY_STRING'])) $request_uri .= '?'.$this->env['QUERY_STRING'];
+                $this->env['REQUEST_URI'] = $request_uri;
+            }
+            $this->env['PARSED_REQUEST_URI'] = str_replace($this->path_prefix, '', $request_uri);
         }
-        return $request_uri;
+        return $this->env['PARSED_REQUEST_URI'];
     }
     
     function server_port() {

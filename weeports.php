@@ -38,5 +38,8 @@ Environment::append_include_path(TEMPLATES_ROOT);
 
 ConnectionManager::$configurations = Spyc::YAMLLoad(CONFIG_ROOT.DS.'database.yml');
 
-$dispatcher = new Dispatcher(REQUEST_URI, $_GET, $_POST);
+$request = new Request(array_merge($_ENV, $_SERVER), $_GET, $_POST);
+$request->path_prefix = PATH_PREFIX;
+
+$dispatcher = new Dispatcher($request);
 echo $dispatcher->dispatch();
