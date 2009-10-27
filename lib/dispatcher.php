@@ -15,7 +15,9 @@ class Dispatcher {
     
     protected static function render_404() {
         header($_SERVER['SERVER_PROTOCOL'].' 404 Not Found');
+        ob_start();
         include PUBLIC_ROOT.DS.'404.html';
+        return ob_get_clean();
     }
     
     protected static function render_index() {
@@ -24,7 +26,10 @@ class Dispatcher {
     
     protected static function render_report($report_file) {
         $report = new Report($report_file);
-        return $report->render();
+        $report->run();
+        $locals = array('report' => $report);
+        $locals['content_for_layout'] = Template::render(VIEWS_TEMPLATE_DIRECTORY.DS.$report->view, $locals);
+        return ($report->layout) ? Template::render(LAYOUTS_TEMPLATE_DIRECTORY.DS.$report->layout, $locals) : $locals['content_for_layout'];
     }
     
 }
