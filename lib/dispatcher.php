@@ -2,39 +2,37 @@
 
 class Dispatcher {
     
-    public $request;
-    
-    function __construct($request) {
-        $this->request = $request;
-    }
-    
-    function dispatch() {
-        $uri = $this->request->request_uri();
+    static function dispatch($request) {
+        $arguments = array($request);
+        $uri = $request->request_uri();
+        
         if (empty($uri) || $uri == '/') {
-            $response = $this->render_index();
+            $method = 'render_index';
         } else if (($file = REPORTS_ROOT.DS.$uri.'.php') && file_exists($file)) {
-            $response = $this->render_report($file);
+            $method = 'render_report';
+            array_unshift($arguments, $file);
         } else {
-            $response = $this->render_404();
+            $method = 'render_404';
         }
-        return $response;
+        
+        return call_user_func_array(array(__CLASS__, $method), $arguments);
     }
     
-    protected function render_404() {
+    protected static function render_404($request) {
         header($_SERVER['SERVER_PROTOCOL'].' 404 Not Found');
         ob_start();
         include PUBLIC_ROOT.DS.'404.html';
         return ob_get_clean();
     }
     
-    protected function render_index() {
+    protected static function render_index($request) {
         // 
     }
     
-    protected function render_report($report_file) {
+    protected static function render_report($report_file, $request) {
         $report = new Report($report_file);
         $report->run();
-        $locals = array('report' => $report, 'request' => $this->request);
+        $locals = array('report' => $report, 'request' => $request);
         $locals['content_for_layout'] = Template::render(VIEWS_TEMPLATE_DIRECTORY.DS.$report->view, $locals);
         return ($report->layout) ? Template::render(LAYOUTS_TEMPLATE_DIRECTORY.DS.$report->layout, $locals) : $locals['content_for_layout'];
     }

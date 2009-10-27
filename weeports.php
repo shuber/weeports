@@ -41,5 +41,4 @@ ConnectionManager::$configurations = Spyc::YAMLLoad(CONFIG_ROOT.DS.'database.yml
 $request = new Request(array_merge($_ENV, $_SERVER), $_GET, $_POST);
 $request->path_prefix = PATH_PREFIX;
 
-$dispatcher = new Dispatcher($request);
-echo $dispatcher->dispatch();
+echo Dispatcher::dispatch($request);
