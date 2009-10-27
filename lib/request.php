@@ -14,6 +14,12 @@ class Request {
         $this->post = $post;
     }
     
+    function __get($key) {
+        if (in_array($key, get_class_methods($this))) {
+            return call_user_func(array($this, $key));
+        }
+    }
+    
     function domain($tld_length = null) {
         if ($this->named_host()) {
             if (is_null($tld_length)) $tld_length = $this->tld_length;
