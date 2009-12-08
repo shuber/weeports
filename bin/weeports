@@ -7,7 +7,7 @@ function copy_directory($source, $destination, $exclusions = array()) {
     if (!file_exists($destination)) mkdir($destination, 0755, true);
     $directory = opendir($source);
     while ($file = readdir($directory)) {
-        if (!in_array($file, $exclusions)) {
+        if (!in_array(basename($file), $exclusions)) {
             $path = $source.DIRECTORY_SEPARATOR.$file;
             echo "Copying $file\n";
             $function = (is_dir($path)) ? 'copy_directory' : 'copy';

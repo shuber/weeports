@@ -50,4 +50,14 @@ class Report {
         }
     }
     
+    static function all() {
+        $reports = glob(REPORTS_ROOT.DS.'*');
+        sort($reports);
+        foreach ($reports as &$report) {
+            preg_match('#'.REPORTS_ROOT.DS.'(.+)\.php$#', $report, $matches);
+            $report = $matches[1];
+        }
+        return $reports;
+    }
+    
 }

@@ -26,7 +26,9 @@ class Dispatcher {
     }
     
     protected static function render_index($request) {
-        // 
+        $locals = array('request' => $request);
+        $locals['content_for_layout'] = Template::render(VIEWS_TEMPLATE_DIRECTORY.DS.'index', $locals);
+        return Template::render(LAYOUTS_TEMPLATE_DIRECTORY.DS.'default', $locals);
     }
     
     protected static function render_report($report_file, $request) {
