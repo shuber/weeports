@@ -10,11 +10,11 @@ function array_delete($key, &$array) {
 }
 
 function array_join_assoc($assoc_glue, $glue, $array) {
-    $result = array();
+    $assoc_joins = array();
     foreach ($array as $key => $value) {
-        $result[] = $key.$assoc_glue.$value;
+        $assoc_joins[] = $key.$assoc_glue.$value;
     }
-    return implode($glue, $result);
+    return implode($glue, $assoc_joins);
 }
 
 function content_tag($type, $content, $attrs = array()) {
