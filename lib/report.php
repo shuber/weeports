@@ -60,4 +60,37 @@ class Report {
         return $reports;
     }
     
+    static function find_by_tags($tags) {
+        // 
+    }
+    
+    static function tags() {
+        if (!$tags = self::read_tags_cache()) {
+            $tags = self::read_tags();
+            self::write_tags_cache($tags);
+        }
+        return $tags;
+    }
+    
+    protected static function read_tags() {
+        $files = (array)glob(REPORTS_ROOT.DS.'*.php');
+        $tags = array();
+        foreach ($files as $file) {
+            $report_path = preg_replace('#^'.REPORTS_ROOT.DS.'#', '', preg_replace('#\.php$#', '', $file));
+            preg_match('#\$this->tags[\s]*=[\s*]["|\']([^"|\']*)["|\']#', file_get_contents($file), $matches);
+            $report_tags = preg_split('#,\s*#', @$matches[1]);
+            sort($report_tags);
+            $tags[$report_path] = $report_tags;
+        }
+        return $tags;
+    }
+    
+    protected static function read_tags_cache() {
+        return (Cache::exists('tags.cache')) ? unserialize(Cache::read('tags.cache')) : false;
+    }
+    
+    protected static function write_tags_cache($tags) {
+        return Cache::write('tags.cache', serialize($tags));
+    }
+    
 }
