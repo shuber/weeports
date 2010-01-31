@@ -3,7 +3,7 @@
 class ConnectionManager {
     
     static $configurations = array();
-    protected static $connections = array();
+    static $connections = array();
     
     static function &connection($name) {
         if (!isset(self::$connections[$name])) self::establish_connection($name);
@@ -13,7 +13,7 @@ class ConnectionManager {
     protected static function establish_connection($name) {
         if (isset(self::$configurations[$name])) {
             $configuration = self::$configurations[$name];
-            $configuration['dbname'] = array_delete('database', $configuration);
+            if (!isset($configuration['dbname'])) $configuration['dbname'] = array_delete('database', $configuration);
             $adapter = array_delete('adapter', $configuration);
             $username = array_delete('username', $configuration);
             $password = array_delete('password', $configuration);
